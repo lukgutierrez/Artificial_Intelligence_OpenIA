@@ -97,9 +97,9 @@ class _HomePageState extends State<HomePage> {
     return Expanded(
       child: TextField(
         textCapitalization: TextCapitalization.sentences,
-        style: const TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.black),
         controller: _textController,
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           filled: true,
           border: InputBorder.none,
           focusedBorder: InputBorder.none,
@@ -187,6 +187,7 @@ class Chatmessagess extends StatelessWidget {
                   ),
                   child: Text(
                     text,
+                    style: TextStyle(fontSize: 15),
                   ),
                 ),
               ],
