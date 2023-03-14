@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 Future<String> generateResponse(String prompt) async {
-  const apiKey = "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";
+  const apiKey = "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";
 
   var url = Uri.https("api.openai.com", "/v1/completions");
   final response = await http.post(
@@ -24,11 +24,11 @@ Future<String> generateResponse(String prompt) async {
     body: json.encode({
       "model": "text-davinci-003",
       "prompt": prompt,
-      'temperature': 0,
-      'max_tokens': 2000,
-      'top_p': 1,
-      'frequency_penalty': 0.0,
-      'presence_penalty': 0.0,
+      // 'temperature': 0,
+      // 'max_tokens': 2000,
+      // 'top_p': 1,
+      // 'frequency_penalty': 0.0,
+      // 'presence_penalty': 0.0,
     }),
   );
 
@@ -54,9 +54,8 @@ class _HomePageState extends State<HomePage> {
       visible: !isLoading,
       child: Container(
         child: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.send_rounded,
-            color: Color.fromRGBO(142, 142, 160, 1),
           ),
           onPressed: () async {
             setState(
@@ -170,16 +169,13 @@ class Chatmessagess extends StatelessWidget {
         children: [
           chatMessageType == ChatMessageType.bot
               ? Container(
-                  child: Icon(Icons.access_alarm_outlined),
-                )
+                  width: 60,
+                  height: 60,
+                  child: Image(image: AssetImage("assets/bot.png")))
               : Container(
-                  margin: const EdgeInsets.only(right: 16.0),
-                  child: const CircleAvatar(
-                    child: Icon(
-                      Icons.person,
-                    ),
-                  ),
-                ),
+                  width: 60,
+                  height: 60,
+                  child: Image(image: AssetImage("assets/user.png"))),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
