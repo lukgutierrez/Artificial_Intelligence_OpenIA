@@ -10,9 +10,10 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+//////////////CONECCIÓN API OPENIA/////////////////////////
 
 Future<String> generateResponse(String prompt) async {
-  const apiKey = "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";
+  const apiKey = "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";
 
   var url = Uri.https("api.openai.com", "/v1/completions");
   final response = await http.post(
@@ -24,17 +25,18 @@ Future<String> generateResponse(String prompt) async {
     body: json.encode({
       "model": "text-davinci-003",
       "prompt": prompt,
-      // 'temperature': 0,
-      // 'max_tokens': 2000,
-      // 'top_p': 1,
-      // 'frequency_penalty': 0.0,
-      // 'presence_penalty': 0.0,
+      'temperature': 0,
+      'max_tokens': 2000,
+      'top_p': 1,
+      'frequency_penalty': 0.0,
+      'presence_penalty': 0.0,
     }),
   );
 
   Map<String, dynamic> newresponse = jsonDecode(response.body);
 
   return newresponse['choices'][0]['text'];
+///////////////////////////////////////////////////////////////
 }
 
 class _HomePageState extends State<HomePage> {
@@ -96,6 +98,7 @@ class _HomePageState extends State<HomePage> {
   Expanded _buildInput() {
     return Expanded(
       child: TextField(
+        cursorColor: Colors.black,
         textCapitalization: TextCapitalization.sentences,
         style: TextStyle(color: Colors.black),
         controller: _textController,
@@ -111,7 +114,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  ///////////////LIST/////////////////
   _buildList() {
     return ListView.builder(
       controller: _scrollController,
@@ -126,7 +128,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-////////////////////////////////////////////////////
   void _scrollDown() {
     _scrollController.animateTo(
       _scrollController.position.maxScrollExtent,
@@ -134,14 +135,13 @@ class _HomePageState extends State<HomePage> {
       curve: Curves.easeOut,
     );
   }
-/////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("@Lukty Intellenge Artificial"),
+        title: Text(""),
       ),
       body: Column(children: [
         Expanded(child: _buildList()),
@@ -168,22 +168,25 @@ class Chatmessagess extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           chatMessageType == ChatMessageType.bot
-              ? Container(
-                  width: 60,
-                  height: 60,
-                  child: Image(image: AssetImage("assets/bot.png")))
+              ? Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                      width: 50,
+                      height: 50,
+                      child: Image(image: AssetImage("assets/bot.png"))),
+                )
               : Container(
-                  width: 60,
-                  height: 60,
+                  width: 50,
+                  height: 50,
                   child: Image(image: AssetImage("assets/user.png"))),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: Text(
                     text,
